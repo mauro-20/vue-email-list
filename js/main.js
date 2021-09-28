@@ -7,16 +7,19 @@
 const app = new Vue({
   el: '#root',
   data: {
-    emails: []
+    emails: [],
+    emailsNumber: 10
   },
   methods: {
 
   },
-  mounted: function () {
-    for (let i = 0; i < 10; i++) {
+  beforeMount: function () {
+    const emailTmp =[]
+    for (let i = 0; i < this.emailsNumber; i++) {
       axios.get('https://flynn.boolean.careers/exercises/api/random/mail').then((response) => {
-        this.emails.push(response.data.response);
+        emailTmp.push(response.data.response);
       })
     }
+    this.emails = emailTmp
   }
 });
